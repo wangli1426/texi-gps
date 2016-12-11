@@ -40,6 +40,15 @@ public class ZOrderCoding {
         return codes;
     }
 
+    public Intervals getIntervalsOfCodesInRectangle(int x1, int x2, int y1, int y2) {
+        List<Integer> codes = getZCodesInRectangle(x1, x2, y1, y2);
+        Intervals intervals = new Intervals();
+        for(Integer code: codes) {
+            intervals.addPoint(code);
+        }
+        return intervals;
+    }
+
 
     static public void main(String[] args) {
         ZOrderCoding zOrderCoding = new ZOrderCoding(256);

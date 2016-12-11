@@ -53,7 +53,7 @@ public class ZOrderCodingTest extends TestCase{
         assertTrue(codes.contains(18));
     }
 
-    public void testZOrderCOdingRectangleSearch2() {
+    public void testZOrderCodingRectangleSearch2() {
         ZOrderCoding zOrderCoding = new ZOrderCoding(256);
         List<Integer> codes = zOrderCoding.getZCodesInRectangle(4, 5, 6, 7);
         assertTrue(codes.contains(56));
@@ -61,4 +61,11 @@ public class ZOrderCodingTest extends TestCase{
         assertTrue(codes.contains(58));
         assertTrue(codes.contains(59));
     }
+
+    public void testZOrderIntervalsOfCodesRectangleSearch() {
+        ZOrderCoding zOrderCoding = new ZOrderCoding(256);
+        Intervals intervals = zOrderCoding.getIntervalsOfCodesInRectangle(4, 5, 6, 7);
+        assertEquals("[56,59]", intervals.toString());
+    }
+
 }
