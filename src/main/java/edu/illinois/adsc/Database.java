@@ -22,7 +22,7 @@ public class Database<Key, Value> {
 
     public Collection<Value> rangeSearch(Key low, Key high) {
         ArrayList<Value> ret = new ArrayList<>();
-        SortedMap<Key, ArrayList<Value>> submap = treeMap.subMap(low, high);
+        SortedMap<Key, ArrayList<Value>> submap = treeMap.subMap(low, true, high, true);
         for (Key key: submap.keySet()) {
             ret.addAll(submap.get(key));
         }
@@ -31,7 +31,7 @@ public class Database<Key, Value> {
 
     public Collection<Value> reangeSearch(Key low, Key high, Predicate<Value> predicate) {
         ArrayList<Value> ret = new ArrayList<>();
-        SortedMap<Key, ArrayList<Value>> submap = treeMap.subMap(low, high);
+        SortedMap<Key, ArrayList<Value>> submap = treeMap.subMap(low, true, high, true);
         for (Key key: submap.keySet()) {
             for(Value value: submap.get(key)) {
                 if(predicate.test(value))

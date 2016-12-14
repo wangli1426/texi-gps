@@ -1,8 +1,10 @@
 package edu.illinois.adsc;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Created by Robert on 12/11/16.
@@ -12,8 +14,8 @@ public class City {
     private int partitions;
     private RangePartition xRangePartition;
     private RangePartition yRangePartition;
-    ZOrderCoding zOrderCoding;
-    Map<Integer, Set<Car>> zcode2Cars = new HashMap<>();
+    private ZOrderCoding zOrderCoding;
+    private Database<Integer, Car> database = new Database<>();
     public City(double x1, double x2, double y1, double y2, int partitions) {
         if(x1 >= x2 || y1 > y2 || partitions < 0)
             throw new IllegalArgumentException("Illegal arguments of City.");
@@ -43,20 +45,19 @@ public class City {
 
     public void store(Car car) {
         int code = getZCodeForALocation(car.x, car.y);
-        if (!zcode2Cars.containsKey(code)) {
-            zcode2Cars.put(code, new HashSet<>());
-        }
-        zcode2Cars.get(code).add(car);
+        database.put(code, car);
     }
 
     List<Car> getCarsInARectangle(double x1, double x2, double y1, double y2) {
         Intervals intervals = getZCodeIntervalsInARectagle(x1, x2, y1, y2);
         List<Car> cars = new ArrayList<>();
         for(Interval interval: intervals.intervals) {
-            for (int code = interval.low; code <= interval.high; code++) {
-                if (zcode2Cars.containsKey(code))
-                    cars.addAll(zcode2Cars.get(code));
-            }
+            cars.addAll(database.reangeSearch(interval.low, interval.high, new Predicate<Car>() {
+                @Override
+                public boolean test(Car car) {
+                    return car.x >= x1 && car.x <= x2 && car.y >= y1 && car.y <= y2;
+                }
+            }));
         }
         return cars;
     }

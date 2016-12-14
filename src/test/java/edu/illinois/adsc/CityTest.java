@@ -51,13 +51,6 @@ public class CityTest extends TestCase{
 
         List<Car> retrievedCars = city.getCarsInARectangle(x1, x2, y1, y2);
 
-        Iterator<Car> iterator = retrievedCars.iterator();
-        while(iterator.hasNext()) {
-            Car car = iterator.next();
-            if(car.x < x1 || car.x > x2 || car.y < y1 || car.y > y2)
-                iterator.remove();
-        }
-
         assertEquals(carsInRectangle.size(), retrievedCars.size());
         for(Car car: retrievedCars) {
             assertTrue(carsInRectangle.contains(car));
