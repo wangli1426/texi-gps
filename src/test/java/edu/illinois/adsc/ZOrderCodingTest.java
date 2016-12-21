@@ -68,4 +68,9 @@ public class ZOrderCodingTest extends TestCase{
         assertEquals("[56,59]", intervals.toString());
     }
 
+    public void testZOrderMaxValue() {
+        ZOrderCoding zOrderCoding = new ZOrderCoding(8);
+        assertEquals(64, zOrderCoding.getMaxZCode());
+    }
+
 }

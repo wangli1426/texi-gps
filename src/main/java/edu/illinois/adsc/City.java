@@ -26,7 +26,7 @@ public class City {
         this.partitions = partitions;
         xRangePartition = new RangePartition(partitions, x1, x2);
         yRangePartition = new RangePartition(partitions, y1, y2);
-        zOrderCoding = new ZOrderCoding(partitions);
+        zOrderCoding = new ZOrderCoding(partitions * partitions);
     }
 
     public int getZCodeForALocation(double x, double y) {

@@ -12,4 +12,8 @@ public class Car {
         this.x = x;
         this.y = y;
     }
+    public String toString() {
+        String string = String.format("Car %d: (%f, %f)", id, x, y);
+        return string;
+    }
 }

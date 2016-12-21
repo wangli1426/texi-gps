@@ -49,6 +49,10 @@ public class ZOrderCoding {
         return intervals;
     }
 
+    public int getMaxZCode() {
+        return (int)Math.pow(2, xBits + yBits);
+    }
+
 
     static public void main(String[] args) {
         ZOrderCoding zOrderCoding = new ZOrderCoding(256);
